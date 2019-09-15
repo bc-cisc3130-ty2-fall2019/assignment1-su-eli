@@ -1,0 +1,90 @@
+/*
+ * Eli Sultanov 
+ * Tuesday/Thursday Class
+ * ID: 23476928
+ * 
+ *  Read Text File using BufferedReader
+ *  Check if all the characters are unique
+ *  sort each string
+ */
+
+import java.util.*;
+import java.io.*;
+
+
+public class AssignmentOne {
+	
+	// Checking if the characters in the string are unique
+	
+	static boolean areCharactersUnique(String str) { 
+          
+		// If at any time we encounter 2 same 
+        // characters, return false 
+        for (int i = 0; i < str.length(); i++) 
+            for (int j = i + 1; j < str.length(); j++) 
+                if (str.charAt(i) == str.charAt(j)) 
+                    return false; 
+  
+        // If no duplicate characters encountered, 
+        // return true 
+        return true;  
+    } 
+	
+	// Sorting our string
+	 public static String sortString(String inputString) 
+	    { 
+	        // convert input string to char array 
+	        char tempArray[] = inputString.toCharArray(); 
+	          
+	        // sort tempArray 
+	        Arrays.sort(tempArray); 
+	          
+	        // return new sorted string 
+	        return new String(tempArray); 
+	    }
+
+	 
+	 // reading the file where our strings are located at. 
+	 
+	 public static void readFile(String path) {
+
+			// Creating the BufferedReader
+			BufferedReader rf = null;
+			
+			try {
+				rf = new BufferedReader(new FileReader(path));
+				String line;
+				
+				// Looping each line and adding each line into its own index inside the s arrayList
+				while ((line = rf.readLine()) !=null) {
+					
+					if (areCharactersUnique(line)) 
+			            System.out.print("\n true " + sortString(line.toLowerCase())); 
+			        else
+			            System.out.print("\n false " + sortString(line.toLowerCase())); 
+
+				}
+				
+			} catch (Exception e) {
+
+			}finally {
+				try {
+					rf.close();
+				} catch (Exception e2) {
+			}
+		}
+	 }
+	
+	public static void main(String[] args){
+
+		// Creating the Scanner
+		Scanner scanner = new Scanner(System.in);
+		
+		// requesting user for the file path
+		System.out.println("Please enter the file path you would this program to read. ");
+		String path = scanner.nextLine();
+		
+		readFile(path);
+		
+		}
+}
